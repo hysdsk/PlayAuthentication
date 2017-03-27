@@ -1,0 +1,24 @@
+@(signinForm: Form[forms.SigninForm])
+
+@main("Signin 画面") {
+
+    @if(signinForm.hasGlobalErrors) {
+        <p class="error">
+            @signinForm.globalError.message
+        </p>
+    }
+
+    <h1>Signin 画面</h1>
+
+    @helper.form(action = routes.SigninController.post()){
+
+        @helper.inputText(signinForm("email"))
+
+        @helper.inputPassword(signinForm("password"))
+
+        <button>Sign In</button>
+
+    }
+
+    <a href="@routes.SignupController.get()">Signup画面へ</a>
+}

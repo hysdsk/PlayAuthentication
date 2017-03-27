@@ -1,0 +1,15 @@
+@(user: models.User)
+
+@main("Index 画面") {
+
+    <h1>Index 画面</h1>
+    <p>Name:@user.name</p>
+    <p>Email:@user.email</p>
+    <p>認証許可中です</p>
+
+    @helper.form(action = routes.IndexController.post()){
+
+        <button>Sign Out</button>
+
+    }
+}

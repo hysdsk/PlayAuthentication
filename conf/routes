@@ -1,0 +1,16 @@
+# Routes
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+GET     /signin                     controllers.SigninController.get
+
+POST    /signin                     controllers.SigninController.post
+
+GET     /signup                     controllers.SignupController.get
+
+POST    /signup                     controllers.SignupController.post
+
+GET     /                           controllers.IndexController.get
+
+POST    /                           controllers.IndexController.post
