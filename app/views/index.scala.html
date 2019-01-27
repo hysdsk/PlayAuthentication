@@ -3,9 +3,18 @@
 @main("Index 画面") {
 
     <h1>Index 画面</h1>
-    <p>Name:@user.name</p>
-    <p>Email:@user.email</p>
-    <p>認証許可中です</p>
+    <table>
+        <tbody><tr>
+            <td>ログイン日時:</td>
+            <td>@user.logined</td>
+        </tr><tr>
+            <td>名前:</td>
+            <td>@user.name</td>
+        </tr><tr>
+            <td>Email:</td>
+            <td>@user.email</td>
+        </tr></tbody>
+    </table>
 
     @helper.form(action = routes.IndexController.post()){
 

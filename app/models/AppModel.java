@@ -9,9 +9,13 @@ import com.avaje.ebean.Model;
 import com.avaje.ebean.annotation.CreatedTimestamp;
 import com.avaje.ebean.annotation.UpdatedTimestamp;
 
+/**
+ * アプリケーションモデル
+ * @author hys_rabbit
+ */
 @MappedSuperclass
 public abstract class AppModel extends Model {
-
+	
 	/** ID */
 	@Id
 	public Long id;

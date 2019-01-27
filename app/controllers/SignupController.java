@@ -1,5 +1,7 @@
 package controllers;
 
+import java.time.LocalDateTime;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -14,6 +16,10 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Result;
 
+/**
+ * サインアップ画面コントローラー
+ * @author hys_rabbit
+ */
 @Singleton
 public class SignupController extends AppController {
 	@Inject
@@ -32,20 +38,23 @@ public class SignupController extends AppController {
 	@Override
 	public Result post() {
 		Form<SignupForm> form = formFactory.form(SignupForm.class).bindFromRequest();
-		
 		if(form.hasErrors()){
 			return badRequest(views.html.signup.render(form));
 		}
 		
 		try{
+			/*
+			 * ユーザ情報を新規登録する。
+			 */
 			Ebean.beginTransaction();
 			User user = new User();
 			user.name = form.get().name;
 			user.email = form.get().email;
 			user.password = BCrypt.hashpw(form.get().password, BCrypt.gensalt());
-			Ebean.save(user);
+			user.logined = LocalDateTime.now();
+			Ebean.insert(user);
 			Ebean.commitTransaction();
-			new SigninController(cache).setCacheEmail(user.email);
+			new SigninController(cache).setCacheUser(user);
 		}catch(Exception e){
 			Ebean.rollbackTransaction();
 			return badRequest(views.html.signup.render(form));
